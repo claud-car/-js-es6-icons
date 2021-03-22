@@ -1,4 +1,8 @@
 $(document).ready(function() {
+
+	var animal = $('#selection');
+
+
 	const icons = [
 		{
 			name: 'cat',
@@ -102,7 +106,7 @@ $(document).ready(function() {
 	icons.forEach((icons,index) => {
 		//stampo in html le icone
 		$('main').append(`
-			<div class="box">
+			<div class="box ${icons.type}">
 			<div class="box-icon">
 			<i class="${icons.family} ${icons.prefix}${icons.name}"></i>
 			<p>${icons.name}</p>
@@ -122,14 +126,39 @@ $(document).ready(function() {
 				console.log("user");
 				return "purple"
 			}
-		})
+		}) //fine condizione if-else
 
+	}) //fine for-each
 
-		})
+	//filtro le scelte in base alla selezione
+	$("#selection").change(function () {
+		//creo const  per poter agire
+		const select = $(this).val()
+
+		//condizione per mostrare/nascondere le opzioni
+		if (select == "all") {
+			//se = all,allora si mostrano tutte le card
+			$('.box').show();
+		} else{
+			//sennò in base alla scelta del select,si nascondono tutte le box,
+			//e si mostrano quelle che hanno come classe,quella scelta nel selector
+			$('.box').hide();
+			$(`.box.${select}`).show();
+		}
+	})
 
 }) //fine document
 
 
+
+
+
+
+// $($("main i")[index]).css("display", () => {
+// 	if (icons.type == "vegetable" || icons.type == "user") {
+// 		return "none"
+// 	}
+// })
 
 
 
